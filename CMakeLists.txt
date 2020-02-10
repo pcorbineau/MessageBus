@@ -16,7 +16,11 @@ target_sources(${PROJECT_NAME}
     include/MessageBus/Util.h
     include/MessageBus/MessageHandler.h)
 
-target_include_directories(${PROJECT_NAME} INTERFACE include)
+target_compile_features(${PROJECT_NAME} INTERFACE cxx_std_14)
 
+target_include_directories(${PROJECT_NAME} INTERFACE include)
 add_executable(test test/main.cpp)
-target_link_libraries(test ${PROJECT_NAME})
+
+find_package (Threads)
+target_link_libraries(test ${PROJECT_NAME} Threads::Threads)
+target_compile_features(test PRIVATE cxx_std_14)

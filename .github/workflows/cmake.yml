@@ -1,0 +1,16 @@
+name: CMake build
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v2
+      - run: mkdir build && cd build && cmake ..
+        shell: bash
+      - run: cmake --build build
+        shell: bash
